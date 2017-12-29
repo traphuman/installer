@@ -10,18 +10,11 @@ apt-get install php7.0-mysql -my
 apt-get install php7.0-gd php7.0-xml php7.0-mbstring php7.0-zip -my
 a2enmod rewrite
 echo "<VirtualHost *:80>
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-	<Directory /var/www/html>
-	 AllowOverride All
-         RewriteEngine On
-         RewriteBase /
-         RewriteCond %{REQUEST_FILENAME} !-f
-         RewriteCond %{REQUEST_FILENAME} !-d
-         RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
-      </Directory>
+ServerAdmin webmaster@localhost
+DocumentRoot /var/www/html
+<Directory /var/www/html>
+AllowOverride All
+</Directory>
 </VirtualHost>" > /etc/apache2/sites-available/000-default.conf
 service apache2 restart
 php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush && chmod +x drush && mv drush /usr/local/bin
