@@ -24,9 +24,10 @@ cd /var/www/html
 mysql -uroot -prootpasswordmysql -e "CREATE DATABASE drupal;"
 mysql -uroot -prootpasswordmysql -e "CREATE USER 'traphumanuser'@'localhost' IDENTIFIED BY 'traphumanuser';"
 mysql -uroot -prootpasswordmysql -e "GRANT ALL PRIVILEGES ON drupal.* TO 'traphumanuser'@'localhost';"
-mysql -uroot -prootpasswordmysql -e "FLUSH PRIVILEGES";
+mysql -uroot -prootpasswordmysql -e "FLUSH PRIVILEGES"
 drush si --db-url="mysql://traphumanuser:traphumanuser@localhost/drupal" --account-name=admin --account-pass=traphuman --locale=es -y
 chmod 777 /var/www/html/sites/default/files/ -R
+drush en admin_toolbar admin_toolbar_tools -y
 drush en admin_toolbar admin_toolbar_tools -y
 drush cr
 mkdir /var/www/html/modules/custom
